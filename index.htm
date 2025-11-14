@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Flight Edge — Índice + Contenido (siglas explicadas)</title>
+<style>
+  :root{
+    --ink:#0b1620; --muted:#6b7b8c; --brand:#0b3d91; --line:#e6eaf2; --card:#f7f9fc; --bg:#fff;
+    --radius:14px; --pad:16px; --headerH:64px; --tap:48px;
+    --fs-body:clamp(15px, 1.6vw, 17px);
+    --fs-h2:clamp(18px, 2.4vw, 22px);
+    --fs-h3:clamp(16px, 2.0vw, 18px);
+    --fs-small:clamp(12px, 1.4vw, 13px);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:Inter, system-ui, Segoe UI, Roboto, Helvetica, Arial, sans-serif;color:var(--ink);background:var(--bg);line-height:1.65;font-size:var(--fs-body)}
+  a{color:inherit;text-decoration:none} a:hover{text-decoration:underline}
+
+  header{position:sticky;top:0;z-index:20;display:flex;align-items:center;min-height:var(--headerH);
+    padding:10px var(--pad); color:#fff; background:linear-gradient(120deg,var(--brand),#072c6a); border-bottom:1px solid #002b6b}
+  .wrap{width:100%;max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:12px;justify-content:space-between}
+  .brand h1{margin:0;font-size:clamp(18px,3.5vw,24px)}
+  .brand p{margin:2px 0 0;opacity:.9;font-size:var(--fs-small)}
+
+  .container{max-width:1100px;margin:0 auto;padding:var(--pad)}
+  .stack{display:grid;grid-template-columns:1fr;gap:16px}
+  @media (min-width: 1024px){ .stack{grid-template-columns:360px 1fr} }
+
+  .index{background:var(--card);border:1px solid var(--line);border-radius:var(--radius)}
+  .index-inner{padding:12px 12px 6px}
+  .index h2{font-size:var(--fs-h2);color:var(--brand);margin:6px 6px 10px}
+  details.idx{border-radius:var(--radius);overflow:hidden}
+  summary.idx-toggle{list-style:none;padding:12px 14px;font-weight:600;display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+  summary.idx-toggle::-webkit-details-marker{display:none}
+  .chip{font-size:var(--fs-small);color:#fff;background:#0b3d91;border-radius:999px;padding:2px 8px}
+
+  ol.h1,ol.h2,ol.h3{list-style:none;margin:0;padding-left:0}
+  .h1>li{margin:10px 0}
+  .h2{padding-left:14px}
+  .h3{padding-left:22px}
+  .title{display:inline-block;padding:8px 10px;border-radius:10px}
+  .title:focus-visible{outline:3px solid #bcd1ff}
+  .title::before{color:var(--brand);font-weight:600}
+  .h1{counter-reset:h1}
+  .h1>li{counter-increment:h1}
+  .h1>li>.title::before{content:counter(h1) ". "}
+  .h2{counter-reset:h2}
+  .h2>li{counter-increment:h2}
+  .h2>li>.title::before{content:counter(h1) "." counter(h2) " "}
+  .h3{counter-reset:h3}
+  .h3>li{counter-increment:h3}
+  .h3>li>.title::before{content:counter(h1) "." counter(h2) "." counter(h3) " "}
+
+  main.content section{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:18px}
+  h2{font-size:var(--fs-h2);color:var(--brand);margin:0 0 8px}
+  h3{font-size:var(--fs-h3);margin:14px 0 8px}
+  h4{font-size:clamp(15px,1.8vw,16px);margin:10px 0 6px}
+  .meta{color:var(--muted);font-size:var(--fs-small);margin-bottom:10px}
+  ul{margin:6px 0 6px 20px}
+  .kpi{display:inline-block;background:#eef3ff;border:1px solid #d9e4ff;padding:2px 8px;border-radius:999px;font-size:12px;margin:0 6px 6px 0}
+  .tag{display:inline-block;border:1px solid var(--line);color:var(--muted);border-radius:999px;font-size:12px;padding:2px 8px;margin:0 6px 6px 0}
+
+  [id]{scroll-margin-top:calc(var(--headerH) + 10px)}
+
+  .to-top{position:fixed;right:12px;bottom:12px;z-index:30;display:inline-flex;align-items:center;justify-content:center;
+    width:var(--tap);height:var(--tap);border-radius:999px;background:#0b3d91;color:#fff;border:1px solid #09316f;text-decoration:none;
+    box-shadow:0 6px 18px rgba(0,0,0,.15);font-weight:700}
+  .to-top:focus-visible{outline:3px solid #bcd1ff}
+
+  @media (min-width:1024px){
+    .index{position:sticky;top:calc(var(--headerH) + 12px);max-height:calc(100vh - var(--headerH) - 24px);overflow:auto}
+    details.idx[open] .idx-toggle{border-bottom:1px solid var(--line)}
+    summary.idx-toggle{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap">
+    <div class="brand">
+      <h1>Flight Edge — Índice & Contenido</h1>
+      <p>Operador estratégico + broker certificado · Mobile-first</p>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="stack">
+
+    <!-- ================== ÍNDICE ================== -->
+    <nav class="index" aria-label="Índice">
+      <details class="idx" open>
+        <summary class="idx-toggle">Índice <span class="chip">toc</span></summary>
+        <div class="index-inner">
+          <h2>Índice</h2>
+          <ol class="h1">
+            <li>
+              <a class="title" href="#a-1">Identidad & Gobernanza</a>
+              <ol class="h2">
+                <li><a class="title" href="#a-1-1">Quiénes somos</a></li>
+                <li><a class="title" href="#a-1-2">Visión y propósito</a></li>
+                <li><a class="title" href="#a-1-3">Modelo operativo</a></li>
+                <li><a class="title" href="#a-1-4">Certificaciones & Regulación aeronáutica</a></li>
+                <li><a class="title" href="#a-1-5">Política de seguridad operacional (SMS)</a></li>
+                <li><a class="title" href="#a-1-6">Equipo directivo & experiencia</a></li>
+              </ol>
+            </li>
+            <li>
+              <a class="title" href="#a-2">Cobertura & Infraestructura</a>
+              <ol class="h2">
+                <li><a class="title" href="#a-2-1">Bases operativas (Hubs)</a></li>
+                <li><a class="title" href="#a-2-2">Áreas de cobertura geográfica</a></li>
+                <li><a class="title" href="#a-2-3">Capacidad de despliegue rápido</a></li>
+                <li><a class="title" href="#a-2-4">Infraestructura y soporte en tierra</a></li>
+                <li><a class="title" href="#a-2-5">Alianzas estratégicas & partners</a></li>
+              </ol>
+            </li>
+            <li>
+              <a class="title" href="#a-3">Flota & Capacidades Operativas (Broker + Operador Certificado)</a>
+              <ol class="h2">
+                <li><a class="title" href="#a-3-1">Modelo Flex-Fleet™</a>
+                  <ol class="h3">
+                    <li><a class="title" href="#a-3-1-1">Matching técnico-operativo</a></li>
+                    <li><a class="title" href="#a-3-1-2">Costo ⇄ performance</a></li>
+                    <li><a class="title" href="#a-3-1-3">Múltiples operadores</a></li>
+                    <li><a class="title" href="#a-3-1-4">Pool 24/7</a></li>
+                  </ol>
+                </li>
+                <li><a class="title" href="#a-3-2">Aeronaves Tripuladas</a>
+                  <ol class="h3">
+                    <li><a class="title" href="#a-3-2-1">Jets ejecutivos</a></li>
+                    <li><a class="title" href="#a-3-2-2">Regionales presurizados</a></li>
+                    <li><a class="title" href="#a-3-2-3">Bush / STOL</a></li>
+                    <li><a class="title" href="#a-3-2-4">Helicópteros multipropósito</a></li>
+                  </ol>
+                </li>
+                <li><a class="title" href="#a-3-3">Drones / RPAS</a>
+                  <ol class="h3">
+                    <li><a class="title" href="#a-3-3-1">Multirrotor industrial</a></li>
+                    <li><a class="title" href="#a-3-3-2">Ala fija</a></li>
+                    <li><a class="title" href="#a-3-3-3">VTOL híbridas</a></li>
+                    <li><a class="title" href="#a-3-3-4">BVLOS</a></li>
+                    <li><a class="title" href="#a-3-3-5">Integración RPAS+Helo+Avión</a></li>
+                  </ol>
+                </li>
+                <li><a class="title" href="#a-3-4">Módulos de configuración rápida</a></li>
+                <li><a class="title" href="#a-3-5">Certificaciones & backbone</a></li>
+              </ol>
+            </li>
+            <li>
+              <a class="title" href="#a-4">Proceso & SLA</a>
+              <ol class="h2">
+                <li><a class="title" href="#a-4-1">Planificación de misión</a></li>
+                <li><a class="title" href="#a-4-2">Evaluación de riesgo (ORM)</a></li>
+                <li><a class="title" href="#a-4-3">Protocolos de seguridad</a></li>
+                <li><a class="title" href="#a-4-4">SLA y métricas</a></li>
+                <li><a class="title" href="#a-4-5">Seguimiento & trazabilidad</a></li>
+                <li><a class="title" href="#a-4-6">Plataforma VTOOL</a></li>
+              </ol>
+            </li>
+            <li>
+              <a class="title" href="#a-5">Servicios Principales</a>
+              <ol class="h2">
+                <li><a class="title" href="#a-5a">5A Aerolínea No Regular</a></li>
+                <li><a class="title" href="#a-5b">5B RPAS / Drones</a></li>
+              </ol>
+            </li>
+            <li>
+              <a class="title" href="#a-6">Verticales por Industria</a>
+              <ol class="h2">
+                <li><a class="title" href="#a-6a">6A Turismo & Experiencias</a></li>
+                <li><a class="title" href="#a-6b">6B Minería & Energía</a></li>
+                <li><a class="title" href="#a-6c">6C Gobierno, Seguridad & Emergencias</a></li>
+                <li><a class="title" href="#a-6d">6D Salud, Ciencia & Cooperación</a></li>
+              </ol>
+            </li>
+            <li>
+              <a class="title" href="#a-7">Recursos & Contacto</a>
+              <ol class="h2">
+                <li><a class="title" href="#a-7-1">Preguntas frecuentes</a></li>
+                <li><a class="title" href="#a-7-2">Formularios de misión</a></li>
+                <li><a class="title" href="#a-7-3">Documentación técnica / media kit</a></li>
+                <li><a class="title" href="#a-7-4">Contacto comercial</a></li>
+              </ol>
+            </li>
+          </ol>
+        </div>
+      </details>
+    </nav>
+
+    <!-- ================== CONTENIDO ================== -->
+    <main class="content">
+
+      <!-- ===== 1. Identidad & Gobernanza ===== -->
+      <section id="a-1" aria-labelledby="h-1">
+        <h2 id="h-1">1. Identidad & Gobernanza</h2>
+        <p class="meta">Operador estratégico + broker certificado con cobertura multirregional.</p>
+
+        <h3 id="a-1-1">1.1 Quiénes somos</h3>
+        <p>
+          Flight Edge nace de pilotos e ingenieros aeroespaciales con foco en <strong>cumplimiento normativo</strong> e <strong>innovación aplicada</strong> a operaciones tripuladas y no tripuladas (RPAS — <em>Sistemas de Aeronaves Pilotadas a Distancia</em>).
+          Operamos como <strong>aerolínea no regular</strong> con cobertura federal desde AEP (<em>Aeroparque Jorge Newbery</em>, Buenos Aires) y bases satélite bajo contrato. Presencia en EE. UU.: <strong>MIA</strong> (Miami International Airport), <strong>IAH</strong> (George Bush Intercontinental) y <strong>ANC</strong> (Ted Stevens Anchorage).
+        </p>
+
+        <h3 id="a-1-2">1.2 Visión y propósito</h3>
+        <p>Continuidad operacional para misiones críticas en Cono Sur y corredores antárticos. Backbone aéreo auditable para salud, industria y gobierno.</p>
+
+        <h3 id="a-1-3">1.3 Modelo operativo</h3>
+        <ul>
+          <li><span class="tag">Command & Control</span> planificación centralizada, ejecución distribuida.</li>
+          <li><span class="tag">Multi-operador</span> red certificada de aviones, helicópteros y RPAS (Sistemas de Aeronaves Pilotadas a Distancia).</li>
+          <li><span class="tag">Trazabilidad</span> VTOOL (Suite Digital de Misión) para seguimiento y post-misión.</li>
+        </ul>
+
+        <h3 id="a-1-4">1.4 Certificaciones & Regulación aeronáutica</h3>
+        <p>Habilitaciones completas en Argentina para <strong>todo tipo de aviones y helicópteros</strong>; certificaciones RPAS (Sistemas de Aeronaves Pilotadas a Distancia) en espacio aéreo controlado y <strong>BVLOS</strong> (<em>Vuelo Más Allá de la Línea de Vista</em>).</p>
+
+        <h3 id="a-1-5">1.5 Política de seguridad operacional (SMS — <em>Sistema de Gestión de la Seguridad Operacional</em>)</h3>
+        <ul>
+          <li>Gestión de riesgos (ORM — <em>Gestión de Riesgo Operacional</em>) antes de cada despacho.</li>
+          <li>FOQA/FDM (<em>Análisis de Datos de Vuelo / Monitoreo de Datos de Vuelo</em>) y lecciones aprendidas.</li>
+        </ul>
+
+        <h3 id="a-1-6">1.6 Equipo directivo & experiencia</h3>
+        <p>Background en aerolíneas, sanitario, SAR (<em>Búsqueda y Rescate</em>) y logística de alto impacto.</p>
+
+        <h3 id="a-1-7">1.x Propuesta de valor</h3>
+        <h4>Seguridad</h4>
+        <p><strong>SMS</strong> (Sistema de Gestión de la Seguridad Operacional) activo con cultura justa; <strong>FOQA/FDM</strong> (Análisis/Monitoreo de Datos de Vuelo); auditorías internas/externas; prácticas alineadas a <strong>OACI</strong> (Organización de Aviación Civil Internacional) / <strong>IS-BAH</strong> (Norma Internacional para Operaciones de Handling de Aviación de Negocios) / <strong>ISO 45001</strong> (Gestión de Seguridad y Salud en el Trabajo).</p>
+        <h4>Puntualidad</h4>
+        <p><strong>OTP ≥ 92%</strong> (On-Time Performance — puntualidad), <strong>dispatch ≥ 98%</strong> (liberación técnica operativa) y <strong>TAT ≤ 35–40′</strong> (Turnaround Time — tiempo de puesta y salida) con tableros por hub.</p>
+        <h4>Cost Efficiency</h4>
+        <p>Selección de <strong>flota correcta por misión</strong>, planificación sin tiempos muertos y <strong>reportes ejecutivos</strong> en VTOOL (Suite Digital de Misión).</p>
+      </section>
+
+      <!-- ===== 2. Cobertura & Infraestructura ===== -->
+      <section id="a-2" aria-labelledby="h-2">
+        <h2 id="h-2">2. Cobertura & Infraestructura</h2>
+
+        <h3 id="a-2-1">2.1 Bases operativas (Hubs)</h3>
+        <p><strong>Base principal:</strong> AEP (Aeroparque Jorge Newbery) – Buenos Aires. <strong>Hubs satélite</strong> (según contrato): AMBA, Córdoba, Mendoza, Neuquén, Comodoro Rivadavia, Salta, Rosario, Bariloche. Bases en EE. UU.: MIA (Miami International), IAH (George Bush Intercontinental), ANC (Ted Stevens Anchorage).</p>
+
+        <h3 id="a-2-2">2.2 Áreas de cobertura geográfica</h3>
+        <p>Argentina, Patagonia, corredores Mercosur, Atlántico Sur y soporte a campañas antárticas estacionales.</p>
+
+        <h3 id="a-2-3">2.3 Capacidad de despliegue rápido</h3>
+        <p>Ventanas de respuesta <span class="kpi">H-48 → H-0</span> (horas previas a salida) según criticidad; pre-posicionamientos y slots coordinados para minimizar <strong>TAT</strong> (Turnaround Time).</p>
+
+        <h3 id="a-2-4">2.4 Infraestructura y soporte en tierra</h3>
+        <p>Cold-weather ops, de-icing, fuel management, flight-following (seguimiento de vuelo), eTechLog (Libro Técnico Electrónico) digital, cadena de frío, seguridad y handling especializado.</p>
+
+        <h3 id="a-2-5">2.5 Alianzas estratégicas & partners</h3>
+        <p>Operadores Part 121/135 (Regulaciones de Operación de Transporte Aéreo en EE. UU.), hospitales de referencia, organismos gubernamentales, ONGs y proveedores críticos.</p>
+      </section>
+
+      <!-- ===== 3. Flota & Capacidades ===== -->
+      <section id="a-3" aria-labelledby="h-3">
+        <h2 id="h-3">3. Flota & Capacidades Operativas (Broker + Operador Certificado)</h2>
+
+        <h3 id="a-3-1">3.1 Modelo Flex-Fleet™</h3>
+        <h4 id="a-3-1-1">3.1.1 Matching técnico-operativo</h4>
+        <p>Selección por payload (carga útil), alcance, altitud, performance en pista y meteorología.</p>
+        <h4 id="a-3-1-2">3.1.2 Costo ⇄ performance</h4>
+        <p>Optimización costo-beneficio con disponibilidad 24/7.</p>
+        <h4 id="a-3-1-3">3.1.3 Múltiples operadores</h4>
+        <p>Orquestación multi-operador bajo nuestros estándares de seguridad y compliance.</p>
+        <h4 id="a-3-1-4">3.1.4 Pool 24/7</h4>
+        <p>Reserva operativa escalable para picos de demanda y emergencias.</p>
+
+        <h3 id="a-3-2">3.2 Aeronaves Tripuladas (referencia)</h3>
+        <ul>
+          <li><strong>Airbus A380</strong> — gran porte/eventos especiales.</li>
+          <li><strong>Learjet 60 / 35</strong> — sanitario/ejecutivo.</li>
+          <li><strong>Fairchild Metro III</strong> — regional/carga ligera.</li>
+          <li><strong>Bell 427</strong> — HEMS (<em>Helicopter Emergency Medical Services — Servicios Médicos de Emergencia en Helicóptero</em>) / SAR (<em>Búsqueda y Rescate</em>) / última milla.</li>
+        </ul>
+
+        <h3 id="a-3-3">3.3 RPAS (sensores & perfiles)</h3>
+        <p>EO/IR (<em>Electro-Óptico / Infrarrojo</em>), LiDAR (<em>Detección y Medición por Luz</em>) y multiespectral; <em>*LiDAR sujeto a proyecto y permisos.</em></p>
+
+        <h3 id="a-3-4">3.4 Módulos de configuración rápida</h3>
+        <p>Sanitario (camillas, UTI — <em>Unidad de Terapia Intensiva</em>, neonatal), SAR (Búsqueda y Rescate) y cadena fría/biológicos. Sensores EO/IR (Electro-Óptico/Infrarrojo), LiDAR (Detección por Luz), SIGMA (<em>Inteligencia de Señales Marítimas/Aeronáuticas</em>), AIS (<em>Sistema de Identificación Automática marítimo</em>). Sistemas de filmación profesional.</p>
+
+        <h3 id="a-3-5">3.5 Certificaciones & backbone regulatorio</h3>
+        <p>Habilitación para vuelos regulares/no regulares (aviones y helicópteros). RPAS (Sistemas de Aeronaves Pilotadas a Distancia) en espacio aéreo controlado y <strong>BVLOS</strong> (Vuelo Más Allá de la Línea de Vista). Protocolos inter-agencia (ANAC — <em>Administración Nacional de Aviación Civil</em> / Fuerzas / Salud / Prefectura).</p>
+      </section>
+
+      <!-- ===== 4. Proceso & SLA ===== -->
+      <section id="a-4" aria-labelledby="h-4">
+        <h2 id="h-4">4. Proceso & SLA (Service Level Agreement — Acuerdo de Nivel de Servicio)</h2>
+
+        <h3 id="a-4-1">4.1 Discovery & arquitectura de misión</h3>
+        <h3 id="a-4-2">4.2 Permisos y compliance</h3>
+        <h3 id="a-4-3">4.3 Alistamiento</h3>
+        <h3 id="a-4-4">4.4 Ejecución (flight-following — seguimiento de vuelo)</h3>
+        <h3 id="a-4-5">4.5 Cierre & reporting</h3>
+        <p class="meta"><strong>SLA referencia:</strong> <strong>OTP ≥ 92%</strong> (Puntualidad); <strong>Dispatch ≥ 98%</strong> (Despacho operativo); <strong>TTL guardia ≤ 60′</strong> (Time-To-Launch — tiempo hasta despegue) hélico / <strong>≤ 120′</strong> jet; <strong>TAT ≤ 35–40′</strong> (Turnaround Time).</p>
+
+        <h3 id="a-4-6">4.6 Plataforma VTOOL (Suite Digital de Misión)</h3>
+        <p><strong>Módulos:</strong> Planner (plan de vuelo, W&amp;B — <em>Peso y Balance</em>, performance, MET/NOTAM — <em>Información Meteorológica/Avisos a Navegantes Aéreos</em>); OpsCenter (flight-following, telemetría RPAS, mensajería); DataHub (FOQA/FDM — <em>Análisis/Monitoreo de Datos de Vuelo</em>, OTP, TAT, consumo, emisiones); Compliance Vault (documentos, habilitaciones, auditorías); Client Portal (tableros y API — <em>Interfaz de Programación de Aplicaciones</em>).</p>
+        <p><strong>Seguridad & métricas:</strong> control de accesos, cifrado, auditoría; reportes por misión, playback y <em>lessons learned</em> (lecciones aprendidas).</p>
+      </section>
+
+      <!-- ===== 5. Servicios Principales ===== -->
+      <section id="a-5" aria-labelledby="h-5">
+        <h2 id="h-5">5. Servicios Principales</h2>
+
+        <h3 id="a-5a">5A Aerolínea No Regular (Tripulada)</h3>
+        <h4 id="a-5a-1">Charter & operación comercial</h4>
+        <ul>
+          <li>Charter ejecutivo, series/puentes aéreos (shuttle corporativo), MICE (<em>Reuniones, Incentivos, Conferencias y Exposiciones</em>), delegaciones.</li>
+          <li>ACMI/Wet lease/Subcharter (<em>Avión-Tripulación-Mantenimiento-Seguro / Arrendamiento con tripulación</em>) para operadores.</li>
+          <li>Shuttle corporativo (energía/minería/infraestructura).</li>
+          <li>Vuelos a teatros remotos y escenarios antárticos estacionales.</li>
+          <li>Turismo aéreo panorámico y filmación (cine/TV).</li>
+        </ul>
+        <h4 id="a-5a-2">Sanitarios, rescate y guardias</h4>
+        <ul>
+          <li>MEDEVAC (<em>Evacuación Médica Aérea</em>) / HEMS (<em>Servicios Médicos de Emergencia en Helicóptero</em>) 24/7 con jets y helicóptero.</li>
+          <li>SAR (<em>Búsqueda y Rescate</em>), stand-by y repatriaciones.</li>
+        </ul>
+        <h4 id="a-5a-3">Carga & logística</h4>
+        <ul>
+          <li>Carga crítica/urgente: AOG (<em>Aeronave en Tierra</em>), repuestos, documentación.</li>
+          <li>Refrigerada, alto valor y DG (<em>Mercancías Peligrosas</em>) bajo protocolo.</li>
+          <li>Intermodal mar–aire con partners.</li>
+        </ul>
+
+        <h3 id="a-5b">5B RPAS / Drones</h3>
+        <ul>
+          <li>Inspección de líneas/ductos, eólico/solar, plantas, off-shore (costa afuera).</li>
+          <li>Topografía: fotogrametría, ortos, 3D/BIM (<em>Modelado de Información de Construcción</em>), LiDAR (Detección por Luz).</li>
+          <li>Seguridad: perimetral EO/IR (Electro-Óptico/Infrarrojo), vigilancia costera, ISR (<em>Inteligencia, Vigilancia y Reconocimiento</em>).</li>
+          <li>Logística liviana y salud; operación VLOS/EVLOS/BVLOS (<em>Línea de Vista / Línea de Vista Extendida / Más Allá de la Línea de Vista</em>).</li>
+          <li>Pipeline de datos: ingesta → QA (<em>Aseguramiento de Calidad</em>) → ML (<em>Aprendizaje Automático</em>) → dashboard ejecutivo.</li>
+        </ul>
+      </section>
+
+      <!-- ===== 6. Verticales por Industria ===== -->
+      <section id="a-6" aria-labelledby="h-6">
+        <h2 id="h-6">6. Verticales por Industria</h2>
+
+        <h3 id="a-6a">6A Turismo & Experiencias</h3>
+        <p id="a-6a-1">Charter VIP Ushuaia → Calafate → Torres del Paine: rutas escénicas premium.</p>
+        <p id="a-6a-2">Antártida Express (vuelo + nave): coordinación integral puerto-aeródromo.</p>
+        <p id="a-6a-3">Avistaje aéreo (fauna/glaciares) bajo normativa ambiental.</p>
+        <p id="a-6a-4">Heli-ski & trekking extremo con protocolos de montaña.</p>
+        <p id="a-6a-5">Sobrevuelos fotográficos/cine: permisos, rutas y estabilización pro.</p>
+        <p id="a-6a-6">Traslados hotel ↔ yate ↔ aeropuerto, logística de lujo.</p>
+        <p id="a-6a-7">Air Safari Patagónico: itinerarios curados + lodges.</p>
+        <p id="a-6a-8">Base cruceros antárticos: turnarounds y contingencias meteo.</p>
+        <p id="a-6a-9">Filmación documental aérea: pilotos con experiencia cine.</p>
+        <p id="a-6a-10">Turismo científico educativo con universidades y ONGs.</p>
+        <p><strong>Turismo grupal multidestinos:</strong> series NR (No Regulares) y charters ad-hoc (MICE — Reuniones, Incentivos, Conferencias y Exposiciones; leisure premium; cruceristas; educativos). Itinerarios ejemplo (Sur 7d, Norte 6d, Vino &amp; Andes 4d) y rutas Mercosur.</p>
+        <p><strong>Giras musicales & espectáculos:</strong> backline/PA/LED; DG (Mercancías Peligrosas) para baterías de litio; aduana con carnet ATA (<em>Admisión Temporal</em>); zero-damage backline; intermodal camión+avión; helicóptero última milla.</p>
+
+        <h3 id="a-6b">6B Minería & Energía</h3>
+        <p id="a-6b-1">Repuestos y maquinaria: continuidad productiva.</p>
+        <p id="a-6b-2">Courier aéreo express interprovincial.</p>
+        <p id="a-6b-3">Materiales peligrosos con protocolos y permisos (DG — Mercancías Peligrosas).</p>
+        <p id="a-6b-4">Abastecimiento a puestos remotos: STOL (<em>Despegues y Aterrizajes en Distancias Cortas</em>) y helicópteros.</p>
+        <p id="a-6b-5">Monitoreo ambiental/marítimo: sensores y reporting.</p>
+        <p id="a-6b-6">Cargas refrigeradas (biológicos) con telemetría.</p>
+        <p id="a-6b-7">Logística aérea-marítima combinada.</p>
+        <p id="a-6b-8">Carga humanitaria internacional.</p>
+        <p id="a-6b-9">Equipamiento técnico de alto valor.</p>
+        <p id="a-6b-10">E-commerce austral: SLAs (Acuerdos de Nivel de Servicio) por tramo.</p>
+        <h4 id="a-6b-11">6B.x Minería — Arquitectura hub &amp; spoke</h4>
+        <p>Nodo troncal en capital provincial; spokes PPR (<em>Previo Permiso Requerido</em>); última milla en helicóptero. RPAS (Sistemas de Aeronaves Pilotadas a Distancia) para reconocimiento, seguridad y topografía. VTOOL (Suite Digital de Misión) para KPIs (<em>Indicadores Clave de Desempeño</em>: OTP, TAT, TTL — <em>Tiempo hasta despegue</em>, <em>downtime avoided</em> — tiempo de inactividad evitado).</p>
+        <h4>Casos modelo</h4>
+        <ul>
+          <li><strong>Catamarca</strong> (3.000–4.000 msnm): STOL (Despegue/Aterrizaje Corto) / horarios fríos; oxígeno a bordo.</li>
+          <li><strong>Neuquén</strong> (shale): shuttle Metro III + hélico a pads; RPAS semanal.</li>
+          <li><strong>Ushuaia/Sur</strong>: combinado mar-aire; hélico última milla; coordinación SAR (Búsqueda y Rescate).</li>
+        </ul>
+        <h4 id="a-6b-12">6B.x Energía — Arquitectura &amp; proceso</h4>
+        <p>Nodo troncal + spokes + FSB (<em>Base Avanzada de Apoyo</em>) + helibase; permisos ANAC (Administración Nacional de Aviación Civil) y, off-shore (costa afuera), autoridad marítima. Series NR (No Regulares), guardias 24/7 y calendario RPAS. Cierre con FOQA/FDM (Análisis/Monitoreo de Datos de Vuelo) y mejora continua.</p>
+        <h4>Casos modelo</h4>
+        <ul>
+          <li><strong>Neuquén — shale (on-shore):</strong> series + hélico a pads; RPAS semanal.</li>
+          <li><strong>Eólico litoral:</strong> RPAS termográficos por strings (cadenas de aerogeneradores); hélico para torres.</li>
+          <li><strong>Solar NOA:</strong> Metro para técnicos; Lear para auditorías.</li>
+          <li><strong>Off-shore Golfo:</strong> base costera; ferry + hélico; RPAS flare/estructura.</li>
+        </ul>
+
+        <h3 id="a-6c">6C Gobierno, Seguridad & Emergencias</h3>
+        <p id="a-6c-1">Vigilancia costera/pesca ilegal: AIS (Sistema de Identificación Automática) y cámaras IR (Infrarrojas).</p>
+        <p id="a-6c-2">Patrullaje SAR (Búsqueda y Rescate) con IR (Infrarrojo): búsqueda y vector helicóptero.</p>
+        <p id="a-6c-3">Respuesta a incendios forestales: brigadistas + apoyo aéreo.</p>
+        <p id="a-6c-4">Transporte de brigadistas: rotaciones seguras.</p>
+        <p id="a-6c-5">Apoyo a Defensa Civil: misiones conjuntas.</p>
+        <p id="a-6c-6">Monitoreo glaciológico/meteo: vuelos periódicos.</p>
+        <p id="a-6c-7">Alerta temprana: detección y despliegue inmediato.</p>
+        <p><strong>Comando de incidentes:</strong> ICS (<em>Sistema de Comando de Incidentes</em>) con roles IC (<em>Incident Commander — Comandante del Incidente</em>) y Air Ops (<em>Operaciones Aéreas</em>).</p>
+
+        <h3 id="a-6d">6D Salud, Ciencia & Cooperación</h3>
+
+        <h4 id="a-6d-1">6D.1 Transporte Sanitario & Evacuaciones</h4>
+        <p>MEDEVAC (Evacuación Médica Aérea) primario/secundario, bed-to-bed (cama a cama), UCI aérea (Unidad de Cuidados Intensivos), neonatal/pediátrico, repatriaciones. Cobertura nacional desde AEP (Aeroparque) + regional por permisos.</p>
+        <h4 id="a-6d-1-1">Flujo bed-to-bed</h4>
+        <ol>
+          <li>Solicitud → datos clínicos y hospital receptor</li>
+          <li>Medical clearance (aprobación médica) & equipamiento</li>
+          <li>Permisos (slots/aduana)</li>
+          <li>Despacho (flight-pack, alternativos, W&amp;B — Peso y Balance)</li>
+          <li>Embarque (ambulift, fijación de camilla)</li>
+          <li>Vuelo (flight-following — seguimiento en vivo)</li>
+          <li>Arribo (hand-off & informe post-misión)</li>
+        </ol>
+        <h4 id="a-6d-1-2">Flota & clínica</h4>
+        <ul>
+          <li>Lear 60/35: UCI aérea 1 camilla (monitor, desfibrilador, ventilador, bombas, O₂ dual).</li>
+          <li>Metro III: 1–2 camillas; módulo sanitario + carga de apoyo.</li>
+          <li>Bell 427: HEMS (Servicios Médicos de Emergencia en Helicóptero) — NVG (<em>Gafas de Visión Nocturna</em>) opcional, winch (malacate) según misión.</li>
+          <li>Extras: incubadora neonatal, aislamiento, telemedicina (sujeto a proyecto).</li>
+        </ul>
+        <h4 id="a-6d-1-3">SLA & KPIs</h4>
+        <p><strong>TTL</strong> (Time-To-Launch — tiempo hasta despegue) ≤ 60′ hélico / ≤ 120′ jet; <strong>OTP</strong> (Puntualidad) ≥ 92%; <strong>Dispatch</strong> (Despacho operativo) ≥ 98%.</p>
+
+        <h4 id="a-6d-2">6D.2 Logística Médica Crítica</h4>
+        <p>Cadena <em>time-critical</em> (crítica en tiempo) para procuración y traslado de órganos/tejidos/equipos. Coordinación con autoridades y centros de ablación/implante; ventanas críticas por órgano; cadena térmica controlada.</p>
+        <h4 id="a-6d-2-1">Operativa multinodal</h4>
+        <ul>
+          <li>Ciudad A → AEP (Aeroparque) → Ciudad B (turn-around mínimo en AEP).</li>
+          <li>Urbano: helicóptero (hospital sin pista) → aeropuerto → jet → receptor.</li>
+          <li>Binacional regional con permisos cruzados, ground dedicado y fast-track sanitario.</li>
+        </ul>
+        <h4 id="a-6d-2-2">KPIs & custodia</h4>
+        <p>TTL (Tiempo hasta despegue), ventana cumplida, puerta-a-puerta, integridad térmica, <em>mission success</em> (misión exitosa). Registro de custodia, firmas y time-stamps (marcas de tiempo).</p>
+
+        <h4 id="a-6d-3">6D.3 Campañas Médicas & Programas Sociales</h4>
+        <p>Clínicas aéreas itinerantes; programas ministeriales/provinciales; misiones con fundaciones; operaciones en territorios indígenas.</p>
+
+        <h4 id="a-6d-4">6D.4 Ciencia & Investigación</h4>
+        <p>Logística a islas y zonas remotas; bioseguridad para muestras; permisos en áreas protegidas; RPAS multiespectral/termografía; datasets (conjuntos de datos) curados.</p>
+
+        <h4 id="a-6d-5">6D.5 Capacitación & Transferencia</h4>
+        <p id="a-6d-5-1">Vuelo sanitario extremo.</p>
+        <p id="a-6d-5-2">Tripulaciones para entornos hostiles.</p>
+        <p id="a-6d-5-3">RPAS (Sistemas de Aeronaves Pilotadas a Distancia) para salud & SAR (Búsqueda y Rescate).</p>
+        <p id="a-6d-5-4">Protocolos inter-agencia.</p>
+        <h4 id="a-6d-5x">Academia Flight Edge — Carrera de Piloto de Drones</h4>
+        <p>Plan de 180 h: normativa ANAC (Administración Nacional de Aviación Civil), aero/meteorología, performance, VLOS/EVLOS/BVLOS (Línea de Vista / Línea Extendida / Más Allá de la Línea de Vista) y UTM (<em>Gestión del Tránsito Aéreo de Drones</em>), EO/IR (Electro-Óptico/Infrarrojo) / LiDAR (Detección por Luz) y fotogrametría, seguridad/SAR (Búsqueda y Rescate), data/IA (Inteligencia Artificial) y reporting. 40 misiones + checkride (vuelo de habilitación). Certificación según normativa.</p>
+      </section>
+
+      <!-- ===== 7. Recursos & Contacto ===== -->
+      <section id="a-7" aria-labelledby="h-7">
+        <h2 id="h-7">7. Recursos & Contacto</h2>
+        <h3 id="a-7-1">7.1 Preguntas frecuentes</h3>
+        <ul>
+          <li><strong>¿Dónde operan?</strong> Base en AEP (Aeroparque) con despliegue federal y hubs; bases en EE. UU.: MIA (Miami), IAH (Houston), ANC (Anchorage).</li>
+          <li><strong>¿Cómo gestionan seguridad?</strong> Just culture (cultura justa), SMS (Sistema de Gestión de Seguridad Operacional), auditorías, FOQA/FDM (Análisis/Monitoreo de Datos de Vuelo).</li>
+          <li><strong>¿Trabajan por SLA?</strong> Sí: OTP (Puntualidad) / TAT (Tiempo de Vuelta) / TTL (Tiempo hasta despegue) / dispatch (Despacho operativo); esquema bonus-malus (incentivos/penalidades) opcional.</li>
+          <li><strong>¿Pueden integrar RPAS?</strong> Sí, con permisos y planificación vía VTOOL (Suite Digital de Misión).</li>
+          <li><strong>¿Cómo se cotiza?</strong> SOW (Alcance de Trabajo) + flota/horas + tierra/permisos; estructura transparente.</li>
+        </ul>
+        <h3 id="a-7-2">7.2 Formularios de misión</h3>
+        <p>Datos mínimos: origen/destino, fechas/ventana, pax/carga, tipo de misión, criticidad.</p>
+        <h3 id="a-7-3">7.3 Documentación técnica / media kit</h3>
+        <p>Fichas de aeronaves, protocolos operativos, dossier sanitario y branding.</p>
+        <h3 id="a-7-4">7.4 Contacto comercial</h3>
+        <p>Email: <a href="mailto:ops@flightedge.aero">ops@flightedge.aero</a> · Tel: +54 11 2132 5555 / +1 786 901 2222</p>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<a class="to-top" href="#top" aria-label="Volver arriba">↑</a>
+
+</body>
+</html>
